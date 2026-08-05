@@ -1,0 +1,43 @@
+name: Validate Renovate config
+
+on:
+  pull_request:
+    paths: &paths
+      - ".github/workflows/validate-renovate-cfg.yaml"
+      - "default.json"
+      - "preset.json5"
+  push:
+    branches:
+      - main
+    paths: *paths
+  workflow_dispatch:
+
+permissions: {}
+
+# When a PR is updated, cancel the jobs from the previous version. Merges
+# do not define head_ref, so use run_id to never cancel those jobs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  validate-renovate-cfg:
+    name: Validate Renovate config
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - run: |
+          for config in default.json preset.json5; do
+            docker run --rm -v \
+              "$WORKSPACE:/workspace" \
+              -w /workspace \
+              ghcr.io/renovatebot/renovate:latest \
+              renovate-config-validator \
+              "$config"
+          done
+        env:
+          WORKSPACE: ${{ github.workspace }}

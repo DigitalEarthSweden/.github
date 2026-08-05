@@ -1,0 +1,94 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  // Always enable the dependency dashboard.
+  dependencyDashboard: true,
+
+  extends: [
+    // NOTE: This is everything inside the "best-practices" preset, *except*
+    // for `:pinDevDependencies`. We intentionally exclude that because it
+    // overrides our desired `rangeStrategy` settings below. Normally our own
+    // settings would take precedence, but the fact that `:pinDevDependencies`
+    // uses a `packageRules` means that it seemingly applies later than
+    // our top-level `rangeStrategy` and `cargo.rangeStrategy`.
+    //
+    // NOTE: We also remove `security:minimumReleaseAgeNpm` for similar reasons;
+    // we apply a blanket `minimumReleaseAge` below instead, and we don't want
+    // the preset messing with it.
+    //
+    // See: https://docs.renovatebot.com/presets-config/#configbest-practices
+    "config:recommended",
+    "docker:pinDigests",
+    "helpers:pinGitHubActionDigests",
+    ":configMigration",
+    "abandonments:recommended",
+    // https://docs.renovatebot.com/presets-helpers/#helperspingithubactiondigeststosemver
+    //"helpers:pinGitHubActionDigestsToSemver",
+  ],
+
+  // Default range strategy for dependencies.
+  // NOTE: We override the range strategy from best-practices here (and below),
+  // because it results in exceedingly noisy updates to non-lockfile dependency files.
+  rangeStrategy: "auto",
+
+  // We apply a default blanket cooldown of 7 days to all dependencies.
+  minimumReleaseAge: "7 days",
+
+  internalChecksFilter: "strict",
+
+  // PR settings.
+  // Our PRs are created immediately. We do this instead of not-pending because the latter
+  // makes Renovate wait an additional 24 hours before creating the PR when there are no checks.
+  prCreation: "immediate",
+
+  // By default, Renovate will only create 2 PRs in any single hourly interval.
+  // But we only allow Renovate to create PRs between midnight and 4am on Monday
+  // in most of our repos, so this is not sufficient in general. Per the docs,
+  // 0 means "no limit": <https://docs.renovatebot.com/configuration-options/#prhourlylimit>
+  prHourlyLimit: 0,
+
+  // Similarly, by default, Renovate will not create any new PRs if it already has 10 open
+  // on any repo, but that isn't generally what we want: we generally want dependency update PRs
+  // for all available dependencies. Per the docs, 0 means "no limit":
+  // <https://docs.renovatebot.com/configuration-options/#prconcurrentlimit>
+  prConcurrentLimit: 0,
+
+  // Conventions: we generally don't use semantic commits, and we add an "internal" label to all dependency update PRs.
+  semanticCommits: "disabled",
+  addLabels: ["internal"],
+
+  separateMajorMinor: false,
+
+  // These notifications are very noisy.
+  suppressNotifications: ["prEditedNotification"],
+
+  // Lock file maintenance configuration
+  lockFileMaintenance: {
+    enabled: false,
+    schedule: ["before 4am on monday"],
+  },
+
+  packageRules: [
+    // All lock file maintenance: group PRs by manager.
+    {
+      description: "Group lockfile updates by manager",
+      matchUpdateTypes: ["lockFileMaintenance"],
+      groupName: "{{manager}} lockfile updates",
+      commitMessageSuffix: "for {{manager}}",
+    },
+    // Docker: use descriptive group name for container image digest updates.
+    {
+      groupName: "container image digests",
+      matchDatasources: ["docker"],
+      matchUpdateTypes: ["pinDigest"],
+      description: "Update container image digests",
+      commitMessageAction: "Update",
+      commitMessageTopic: "container image digests",
+    },
+  ],
+
+  vulnerabilityAlerts: {
+    enabled: true,
+    vulnerabilityFixStrategy: "lowest",
+  },
+}
