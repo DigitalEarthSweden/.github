@@ -87,6 +87,15 @@
     },
   ],
 
+  hostRules: [
+    {
+      hostType: "docker",
+      matchHost: "harbor.digitalearth.se",
+      username: "{{ secrets.HARBOR_DIGITALEARTH_SE_USER }}",
+      password: "{{ secrets.HARBOR_DIGITALEARTH_SE_PASSWORD }}",
+    },
+  ],
+
   vulnerabilityAlerts: {
     enabled: true,
     vulnerabilityFixStrategy: "lowest",
