@@ -84,9 +84,6 @@ jobs:
         env:
           # Job configuration.
           LOG_LEVEL: ${{ inputs.log-level || 'info' }}
-          # RENOVATE_CONFIG_FILE is required for config validation to work
-          # on pull requests from the renovate/reconfigure branch.
-          RENOVATE_CONFIG_FILE: ".github/renovate-config.ts"
           RENOVATE_PLATFORM_COMMIT: "enabled"
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repo-cache || 'enabled' }}
           # Credentials
