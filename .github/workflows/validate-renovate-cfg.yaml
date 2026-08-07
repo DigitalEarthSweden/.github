@@ -12,6 +12,9 @@ on:
     paths: *paths
   workflow_dispatch:
 
+env:
+  RENOVATE_VERSION: 44.14.2@sha256:0a5b0560ea57352adbf2472e39b93dba1cd526f7e1e14a2da0029fddd0e8ec92 # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
+
 permissions: {}
 
 # When a PR is updated, cancel the jobs from the previous version. Merges
@@ -35,7 +38,7 @@ jobs:
             docker run --rm -v \
               "$WORKSPACE:/workspace" \
               -w /workspace \
-              ghcr.io/renovatebot/renovate:latest \
+              ghcr.io/renovatebot/renovate:${{ env.RENOVATE_VERSION }} \
               renovate-config-validator --strict \
               "$config"
           done
