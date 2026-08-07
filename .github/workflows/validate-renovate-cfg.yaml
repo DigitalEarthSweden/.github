@@ -36,7 +36,7 @@ jobs:
               "$WORKSPACE:/workspace" \
               -w /workspace \
               ghcr.io/renovatebot/renovate:latest \
-              renovate-config-validator \
+              renovate-config-validator --strict \
               "$config"
           done
         env:
