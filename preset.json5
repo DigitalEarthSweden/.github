@@ -64,8 +64,7 @@
 
   // Lock file maintenance configuration
   lockFileMaintenance: {
-    enabled: false,
-    schedule: ["before 4am on monday"],
+    schedule: ["before 5am on monday"],
   },
 
   packageRules: [
