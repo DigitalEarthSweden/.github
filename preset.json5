@@ -10,7 +10,7 @@
     // overrides our desired `rangeStrategy` settings below. Normally our own
     // settings would take precedence, but the fact that `:pinDevDependencies`
     // uses a `packageRules` means that it seemingly applies later than
-    // our top-level `rangeStrategy` and `cargo.rangeStrategy`.
+    // our top-level `rangeStrategy` and `pep621.rangeStrategy`.
     //
     // NOTE: We also remove `security:minimumReleaseAgeNpm` for similar reasons;
     // we apply a blanket `minimumReleaseAge` below instead, and we don't want
@@ -30,6 +30,12 @@
   // NOTE: We override the range strategy from best-practices here (and below),
   // because it results in exceedingly noisy updates to non-lockfile dependency files.
   rangeStrategy: "auto",
+
+  // Additionally, we set the range strategy for pep621 to 'update-lockfile' to avoid
+  // unnecessary updates to pyproject.toml files.
+  pep621: {
+    rangeStrategy: 'update-lockfile',
+  },
 
   // We apply a default blanket cooldown of 7 days to all dependencies.
   minimumReleaseAge: "7 days",
