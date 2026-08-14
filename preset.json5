@@ -24,6 +24,7 @@
     "abandonments:recommended",
     // https://docs.renovatebot.com/presets-helpers/#helperspingithubactiondigeststosemver
     //"helpers:pinGitHubActionDigestsToSemver",
+    ":automergeDigest",
   ],
 
   // Default range strategy for dependencies.
