@@ -25,6 +25,7 @@
     // https://docs.renovatebot.com/presets-helpers/#helperspingithubactiondigeststosemver
     //"helpers:pinGitHubActionDigestsToSemver",
     ":automergeDigest",
+    ":automergePatch",
   ],
 
   // Default range strategy for dependencies.
