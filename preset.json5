@@ -93,6 +93,17 @@
       commitMessageAction: "Update",
       commitMessageTopic: "container image digests",
     },
+    // Throttle updates of packages that release too frequently.
+    {
+      groupName: "uv",
+      matchPackageNames: ["ghcr.io/astral-sh/uv"],
+      schedule: ["every 2 weeks before 5am on monday"],
+    },
+    {
+      groupName: "boto",
+      matchPackageNames: ["boto{/,}**"],
+      "schedule": ["every 2 weeks before 5am on monday"],
+    },
   ],
 
   customManagers: [
