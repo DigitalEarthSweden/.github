@@ -100,7 +100,7 @@
       description: "Update _VERSION variables in Dockerfiles",
       managerFilePatterns: ["/(^|/|\\.)Dockerfile$/", "/(^|/)Dockerfile\\.[^/]*$/"],
       matchStrings: [
-        "# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))? packageName=(?<packageName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s(?:ENV|ARG) .+?_VERSION=(?<currentValue>.+?)\\s",
+        "# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))? packageName=(?<packageName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s(?:ENV|ARG) .+?_VERSION=(?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\\s",
       ],
     },
     {
@@ -108,8 +108,8 @@
       description: "Update `version:` and `_VERSION:` variables in github workflows",
       managerFilePatterns: ["/^\\.github/workflows/[^/]+\\.ya?ml$/"],
       matchStrings: [
-        "\\s+(?:[a-z]+(-|_))?version: (?<currentValue>.+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?(?: versioning=(?<versioning>.+?))?\\s",
-        "\\s*[A-Z_]+?_VERSION: (?<currentValue>.+?) # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?(?: versioning=(?<versioning>.+?))?\\s",
+        "\\s+(?:[a-z]+(-|_))?version: (?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))? # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?(?: versioning=(?<versioning>.+?))?\\s",
+        "\\s*[A-Z_]+?_VERSION: (?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))? # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?(?: versioning=(?<versioning>.+?))?\\s",
       ],
     },
   ],
