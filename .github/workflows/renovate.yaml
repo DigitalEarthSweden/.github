@@ -21,6 +21,16 @@ on:
           - reset
   schedule:
     - cron: "0,30 * * * *"
+  pull_request:
+    paths: &paths
+      - ".github/workflows/renovate.yaml"
+      - ".github/renovate-config.ts"
+      - "default.json"
+      - "preset.json5"
+  push:
+    branches:
+      - main
+    paths: *paths
 
 env:
   cache_dir: /tmp/renovate/cache/renovate/repository
