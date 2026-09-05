@@ -35,7 +35,7 @@ on:
 env:
   cache_dir: /tmp/renovate/cache/renovate/repository
   cache_key: renovate-cache
-  RENOVATE_VERSION: 44.14.2@sha256:0a5b0560ea57352adbf2472e39b93dba1cd526f7e1e14a2da0029fddd0e8ec92 # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
+  RENOVATE_VERSION: 44.65.5@sha256:4e10f76a79f1c597f427f83c788a9f5b14a6295784c4cb68307b89b0a954abce # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
   RENOVATE_CONFIG_FILE: ".github/renovate-config.ts"
 
 permissions: {}
