@@ -36,7 +36,6 @@ env:
   cache_dir: /tmp/renovate/cache/renovate/repository
   cache_key: renovate-cache
   RENOVATE_VERSION: 44.65.5@sha256:4e10f76a79f1c597f427f83c788a9f5b14a6295784c4cb68307b89b0a954abce # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
-  RENOVATE_CONFIG_FILE: ".github/renovate-config.ts"
 
 permissions: {}
 
@@ -91,7 +90,7 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@5402b206248e5a8c8427a15102702eb9c1793efc # v46.2.4
         with:
-          configurationFile: ${{ env.RENOVATE_CONFIG_FILE }}
+          configurationFile: ".github/renovate-config.ts"
           renovate-version: ${{ env.RENOVATE_VERSION }}
           token: ${{ steps.get_token.outputs.token }}
         env:
