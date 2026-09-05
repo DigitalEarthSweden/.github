@@ -93,6 +93,11 @@
       commitMessageAction: "Update",
       commitMessageTopic: "container image digests",
     },
+    // Disable minimumReleaseAge for data sources without release timestamps.
+    {
+      matchDepTypes: ["github-runner"],
+      minimumReleaseAge: null,
+    },
     // Throttle updates of packages that release too frequently.
     {
       groupName: "uv",
