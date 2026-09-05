@@ -90,7 +90,9 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@5402b206248e5a8c8427a15102702eb9c1793efc # v46.2.4
         with:
-          configurationFile: ".github/renovate-config.ts"
+          configurationFile: "config.mjs"
+          docker-volumes: |
+            ${{ github.workspace }}/.github/renovate-config.ts:/github-action/.github/renovate-config.ts
           renovate-version: ${{ env.RENOVATE_VERSION }}
           token: ${{ steps.get_token.outputs.token }}
         env:
