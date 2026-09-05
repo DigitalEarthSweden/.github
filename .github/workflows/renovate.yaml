@@ -27,6 +27,7 @@ on:
       - ".github/renovate-config.ts"
       - "default.json"
       - "preset.json5"
+      - "renovate.json"
   push:
     branches:
       - main

@@ -6,6 +6,7 @@ on:
       - ".github/workflows/validate-renovate-cfg.yaml"
       - "default.json"
       - "preset.json5"
+      - "renovate.json"
   push:
     branches:
       - main
