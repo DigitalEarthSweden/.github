@@ -98,6 +98,12 @@
       matchDepTypes: ["github-runner"],
       minimumReleaseAge: null,
     },
+    {
+      // gh-39064 contains information about this.
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/^ghcr\\.io//"],
+      minimumReleaseAge: null,
+    },
     // Throttle updates of packages that release too frequently.
     {
       groupName: "uv",
