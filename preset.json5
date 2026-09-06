@@ -25,9 +25,6 @@
     // https://docs.renovatebot.com/presets-helpers/#helperspingithubactiondigeststosemver
     //"helpers:pinGitHubActionDigestsToSemver",
     // Additions to config:best-practices.
-    "customManagers:dockerfileVersions",
-    "customManagers:githubActionsVersions",
-    "customManagers:makefileVersions",
     ":automergeDigest",
     ":automergePatch",
     ":automergeMinor",
@@ -119,6 +116,33 @@
       groupName: "boto",
       matchPackageNames: ["boto{/,}**"],
       "schedule": ["every 2 weeks before 5am on monday"],
+    },
+  ],
+
+  customManagers: [
+    {
+      customType: "regex",
+      description: "Update _VERSION variables in Dockerfiles",
+      "managerFilePatterns": [
+        "**/[Dd]ockerfile*",
+        "**/[Cc]ontainerfile*",
+        "**/*.[Dd]ockerfile*",
+        "**/*.[Cc]ontainerfile*"
+      ],
+      matchStrings: [
+        "# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))? packageName=(?<packageName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s(?:ENV|ARG) .+?_VERSION=(?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\\s",
+      ],
+    },
+    {
+      customType: "regex",
+      description: "Update `_VERSION:` variables in workflows",
+      "managerFilePatterns": [
+        "/(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$/",
+        "/(^|/)action\\.ya?ml$/"
+      ],
+      matchStrings: [
+        "# renovate: datasource=(?<datasource>[a-zA-Z0-9-._]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*:\\s*[\"']?(?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))?[\"']?\\s",
+      ],
     },
   ],
 
