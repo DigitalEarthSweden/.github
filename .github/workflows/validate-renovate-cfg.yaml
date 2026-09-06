@@ -14,7 +14,8 @@ on:
   workflow_dispatch:
 
 env:
-  RENOVATE_VERSION: 44.65.5@sha256:4e10f76a79f1c597f427f83c788a9f5b14a6295784c4cb68307b89b0a954abce # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
+  # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
+  RENOVATE_VERSION: 44.65.5@sha256:4e10f76a79f1c597f427f83c788a9f5b14a6295784c4cb68307b89b0a954abce
 
 permissions: {}
 

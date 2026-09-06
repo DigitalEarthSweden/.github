@@ -24,6 +24,10 @@
     "abandonments:recommended",
     // https://docs.renovatebot.com/presets-helpers/#helperspingithubactiondigeststosemver
     //"helpers:pinGitHubActionDigestsToSemver",
+    // Additions to config:best-practices.
+    "customManagers:dockerfileVersions",
+    "customManagers:githubActionsVersions",
+    "customManagers:makefileVersions",
     ":automergeDigest",
     ":automergePatch",
     ":automergeMinor",
@@ -115,26 +119,6 @@
       groupName: "boto",
       matchPackageNames: ["boto{/,}**"],
       "schedule": ["every 2 weeks before 5am on monday"],
-    },
-  ],
-
-  customManagers: [
-    {
-      customType: "regex",
-      description: "Update _VERSION variables in Dockerfiles",
-      managerFilePatterns: ["/(^|/|\\.)Dockerfile$/", "/(^|/)Dockerfile\\.[^/]*$/"],
-      matchStrings: [
-        "# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))? packageName=(?<packageName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s(?:ENV|ARG) .+?_VERSION=(?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\\s",
-      ],
-    },
-    {
-      customType: "regex",
-      description: "Update `version:` and `_VERSION:` variables in github workflows",
-      managerFilePatterns: ["/^\\.github/workflows/[^/]+\\.ya?ml$/"],
-      matchStrings: [
-        "\\s+(?:[a-z]+(-|_))?version: (?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))? # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?(?: versioning=(?<versioning>.+?))?\\s",
-        "\\s*[A-Z_]+?_VERSION: (?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))? # renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?(?: versioning=(?<versioning>.+?))?\\s",
-      ],
     },
   ],
 
