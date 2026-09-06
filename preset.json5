@@ -95,6 +95,11 @@
       commitMessageAction: "Update",
       commitMessageTopic: "container image digests",
     },
+    // Strip GDAL prefix so Renovate understands the version.
+    {
+      matchPackageNames: ["ghcr.io/osgeo/gdal"],
+      versioning: "regex:^ubuntu-(?:full|small)-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+    },
     // Disable minimumReleaseAge for data sources without release timestamps.
     {
       matchDepTypes: ["github-runner"],
