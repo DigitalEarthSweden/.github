@@ -113,13 +113,8 @@
     },
     // Throttle updates of packages that release too frequently.
     {
-      groupName: "uv",
-      matchPackageNames: ["ghcr.io/astral-sh/uv"],
-      schedule: ["every 2 weeks before 5am on monday"],
-    },
-    {
-      groupName: "boto",
-      matchPackageNames: ["boto{/,}**"],
+      groupName: "biweekly-updates",
+      matchPackageNames: ["boto{/,}**", "ghcr.io/renovatebot/renovate", "ghcr.io/astral-sh/uv"],
       schedule: ["every 2 weeks before 5am on monday"],
     },
   ],
