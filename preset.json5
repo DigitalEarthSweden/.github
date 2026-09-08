@@ -102,6 +102,10 @@
     },
     // Disable minimumReleaseAge for data sources without release timestamps.
     {
+      matchDatasources: ["deb"],
+      minimumReleaseAge: null,
+    },
+    {
       matchDepTypes: ["github-runner"],
       minimumReleaseAge: null,
     },
@@ -132,6 +136,16 @@
       matchStrings: [
         "# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))? packageName=(?<packageName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s(?:ENV|ARG) .+?_VERSION=(?<currentValue>[^@\\\\s]+?)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\\s",
       ],
+    },
+    {
+      customType: "regex",
+      description: "Update _VERSION variables for Ubuntu packages in Makefiles",
+      managerFilePatterns: ["**/[Mm]akefile", "**/GNUMakefile", "**/*.mk"],
+      matchStrings: [
+        "# renovate: datasource=deb suite=(?<suite>[^\\s]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*=\\s*[\"']?(?<currentValue>[^\\\\s]+?)[\"']?\\s",
+      ],
+      registryUrlTemplate: "https://apt.postgresql.org/pub/repos/apt?suite={{suite}}&components=main&binaryArch=amd64",
+      datasourceTemplate: "deb",
     },
     {
       customType: "regex",
