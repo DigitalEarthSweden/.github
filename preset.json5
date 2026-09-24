@@ -88,35 +88,39 @@
     },
     // Docker: use descriptive group name for container image digest updates.
     {
+      description: "Update container image digests",
       groupName: "container image digests",
       matchDatasources: ["docker"],
       matchUpdateTypes: ["pinDigest"],
-      description: "Update container image digests",
       commitMessageAction: "Update",
       commitMessageTopic: "container image digests",
     },
     // Strip GDAL prefix so Renovate understands the version.
     {
+      description: "Tolerate version prefix on GDAL Docker images",
       matchPackageNames: ["ghcr.io/osgeo/gdal"],
       versioning: "regex:^ubuntu-(?:full|small)-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
     },
     // Disable minimumReleaseAge for data sources without release timestamps.
     {
+      description: "Disable minimumReleaseAge for deb package updates",
       matchDatasources: ["deb"],
       minimumReleaseAge: null,
     },
     {
+      description: "Disable minimumReleaseAge for github-runner updates",
       matchDepTypes: ["github-runner"],
       minimumReleaseAge: null,
     },
     {
       // gh-39064 contains information about this.
+      description: "Disable minimumReleaseAge for ghcr.io updates",
       matchDatasources: ["docker"],
       matchPackageNames: ["/^ghcr\\.io//"],
       minimumReleaseAge: null,
     },
-    // Throttle updates of packages that release too frequently.
     {
+      description: "Throttle updates of packages that release frequently",
       groupName: "biweekly-updates",
       matchPackageNames: ["boto{/,}**", "ghcr.io/renovatebot/renovate", "ghcr.io/astral-sh/uv"],
       schedule: ["every 2 weeks before 5am on monday"],
