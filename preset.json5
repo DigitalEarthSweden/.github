@@ -121,6 +121,11 @@
       matchPackageNames: ["boto{/,}**", "ghcr.io/renovatebot/renovate", "ghcr.io/astral-sh/uv"],
       schedule: ["every 2 weeks before 5am on monday"],
     },
+    {
+      description: "Disable automerge for dependency updates in the upstream directory",
+      matchFileNames: ["upstream/**"],
+      automerge: false,
+    },
   ],
 
   customManagers: [
