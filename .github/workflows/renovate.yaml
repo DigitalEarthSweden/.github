@@ -36,6 +36,8 @@ on:
 env:
   cache_dir: /tmp/renovate/cache/renovate/repository
   cache_key: renovate-cache
+  # renovate: datasource=docker depName=renovatebot/renovate packageName=ghcr.io/renovatebot/renovate
+  RENOVATE_VERSION: 44.104.2@sha256:c87b1c55ab98286dad9df0c1d84ebe1fbe2a805a68d48dd7a6d577709bf951a7
 
 permissions: {}
 
@@ -91,7 +93,7 @@ jobs:
         uses: renovatebot/github-action@dcfba84a42d1b5d5e49bf131b1bf53511851a123 # v46.3.1
         with:
           configurationFile: ".github/renovate-config.ts"
-          renovate-version: 44.104.2@sha256:c87b1c55ab98286dad9df0c1d84ebe1fbe2a805a68d48dd7a6d577709bf951a7
+          renovate-version: ${{ env.RENOVATE_VERSION }}
           token: ${{ steps.get_token.outputs.token }}
         env:
           # Job configuration.
