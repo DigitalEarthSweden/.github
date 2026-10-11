@@ -113,6 +113,11 @@
       minimumReleaseAge: null,
     },
     {
+      description: "Disable minimumReleaseAge for packages close to us",
+      matchPackageNames: ["datacube-explorer", "datacube-ows", "gdal"],
+      minimumReleaseAge: null,
+    },
+    {
       // gh-39064 contains information about this.
       description: "Disable minimumReleaseAge for ghcr.io updates",
       matchDatasources: ["docker"],
