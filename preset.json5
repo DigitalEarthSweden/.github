@@ -114,7 +114,11 @@
     },
     {
       description: "Disable minimumReleaseAge for packages close to us",
-      matchPackageNames: ["datacube-explorer", "datacube-ows", "gdal"],
+      matchPackageNames: [
+        "opendatacube/datacube-explorer",
+        "opendatacube/datacube-ows",
+        "OSGeo/gdal",
+      ],
       minimumReleaseAge: null,
     },
     {
