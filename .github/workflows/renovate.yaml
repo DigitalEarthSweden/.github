@@ -91,7 +91,7 @@ jobs:
         uses: renovatebot/github-action@230ce922b08968d0a4f6f70f295601daff09ef1d # v46.3.7
         with:
           configurationFile: ".github/renovate-config.ts"
-          renovate-image: ghcr.io/renovatebot/renovate:44.155.1@sha256:f5796f26088c0f5debb07c16fa9e801145e4d3ba9717d9cc22ca8cd265e2a0eb
+          renovate-image: ghcr.io/renovatebot/renovate:44.167.5@sha256:c33150ec6407624a9399a2d827fd125becafdbe4519d7584488cbdd17f99081e
           token: ${{ steps.get_token.outputs.token }}
         env:
           # Job configuration.
