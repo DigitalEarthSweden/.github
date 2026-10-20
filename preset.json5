@@ -108,11 +108,6 @@
       minimumReleaseAge: null,
     },
     {
-      description: "Disable minimumReleaseAge for github-runner updates",
-      matchDepTypes: ["github-runner"],
-      minimumReleaseAge: null,
-    },
-    {
       description: "Disable minimumReleaseAge for packages close to us",
       matchPackageNames: ["datacube-explorer", "datacube-ows", "gdal"],
       minimumReleaseAge: null,
