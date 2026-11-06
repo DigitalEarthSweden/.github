@@ -88,7 +88,7 @@ jobs:
           ls -R $cache_dir
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@2804199d260ad00c1fae0e9e842888369391c776 # v46.3.10
+        uses: renovatebot/github-action@43b963bf5dd5e57f1f95c59765a018d782870211 # v46.3.11
         with:
           configurationFile: ".github/renovate-config.ts"
           renovate-image: ghcr.io/renovatebot/renovate:44.221.0@sha256:fc9d9ea902fa0f3892e0a6e0e4924b04e80becc3d475d8b14849b0e39b81c409
