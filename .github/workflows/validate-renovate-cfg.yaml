@@ -15,7 +15,7 @@ on:
 
 env:
   # renovate: datasource=docker depName=renovatebot/renovate packageName=ghcr.io/renovatebot/renovate
-  RENOVATE_VERSION: 44.221.0@sha256:fc9d9ea902fa0f3892e0a6e0e4924b04e80becc3d475d8b14849b0e39b81c409
+  RENOVATE_VERSION: 44.223.1@sha256:4d82316637556d793f1c0e248e003a3842ebadecea0a9f4e9b77c12421da2122
 
 permissions: {}
 
