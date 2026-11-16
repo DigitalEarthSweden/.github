@@ -2,7 +2,9 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
 
   // Always enable the dependency dashboard.
-  dependencyDashboard: true,
+  dependencyDashboard: {
+    enabled: true,
+  },
 
   extends: [
     // NOTE: This is everything inside the "best-practices" preset, *except*
